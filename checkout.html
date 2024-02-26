@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <div id="home">
+        <div>
+            <button onclick="homeScreen()">Coffee Order System</button>
+        </div>
+    </div>
+
+    <div id="orderPlaced">Order Placed!</div>
+    <div id="id"></div>
+    <div id="orderDetails"></div>
+    <div id="orderPrice"></div>
+
+    <script>
+        function homeScreen() {
+            window.location.href = 'index.html';
+        }
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const beverage = urlParams.get('beverage');
+        const condiments = urlParams.get('condiments');
+
+        let condimentDetails = ''
+
+        const beveragePrices = {
+            'darkroast': 1.99,
+            'decaf': 1.28,
+            'espresso': 1.34,
+            'houseblend': 1.65
+        };
+
+
+        const condimentPrices = {
+            'whip': 0.25,
+            'soy': 0.5,
+            'milk': 0.4,
+            'mocha': 0.3
+        };
+
+        let price = beveragePrices[beverage];
+        if (condiments) {
+            const condimentsList = condiments.split(',');
+            if (condimentsList.length > 0) {
+                condimentDetails += ' with ';
+                condimentDetails += condimentsList.join(' and ');
+            }
+            condimentsList.forEach(condiment => {
+                price += condimentPrices[condiment];
+            })
+        }
+        
+        const id = Math.floor(Math.random() * 100) + 1;
+
+        document.getElementById('id').innerText = 'ID: ' + id;
+        document.getElementById('orderDetails').innerText =  beverage + condimentDetails;
+        document.getElementById('orderPrice').innerText = 'Price: $' + price.toFixed(2);
+    </script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div id="home">
+            <div>
+                <button onclick="homeScreen()">Coffee Order System</button>
+                <button onclick="beverageScreen()">Start Your Order</button>
+            </div>
+        </div>
+        <script>
+            function homeScreen() {
+                document.getElementById("home").style.display = "block";
+                document.getElementById("addBeverage").style.display = "none";
+            }
+
+            function beverageScreen() {
+                window.location.href = "addBeverage.html";
+            }
+        </script>
+    </body>
+</html>

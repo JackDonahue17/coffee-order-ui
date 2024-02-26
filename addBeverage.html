@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div id="home">
+            <div>
+                <button onclick="homeScreen()">Coffee Order System</button>
+            </div>
+        </div>
+        <div>
+            <div id="dark-roast">
+                <button onclick="changeBeverage('darkroast')">Dark Roast</button>
+            </div>
+        </div>
+        <div>
+            <div id="decaf">
+                <button onclick="changeBeverage('decaf')">Decaf</button>
+            </div>
+        </div>
+        <div>
+            <div id="espresso">
+                <button onclick="changeBeverage('espresso')">Espresso</button>
+            </div>
+        </div>
+        <div>
+            <div id="house-blend">
+                <button onclick="changeBeverage('houseblend')">House Blend</button>
+            </div>
+        </div>
+
+        
+
+        <script>
+            function homeScreen() {
+                window.location.href = 'index.html';
+            }
+
+            function changeBeverage(beverage) {
+                location.href = "addCondiment.html?beverage=" + beverage;
+            }
+        </script>
+    </body>
+</html>

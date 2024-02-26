@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div id="home">
+            <div>
+                <button onclick="homeScreen()">Coffee Order System</button>
+            </div>
+        </div>
+        <div id="whip">
+            <div>
+                <button onclick="toggleCondiment('whip')">Whip</button>
+            </div>
+        </div>
+        <div id="mocha">
+            <div>
+                <button onclick="toggleCondiment('mocha')">Mocha</button>
+            </div>
+        </div>
+        <div id="milk">
+            <div>
+                <button onclick="toggleCondiment('milk')">Milk</button>
+            </div>
+        </div>
+        <div id="soy">
+            <div>
+                <button onclick="toggleCondiment('soy')">Soy</button>
+            </div>
+        </div>
+        <div>
+            <div id="checkout">
+                <button onclick="checkout('checkout')">Checkout</button>
+            </div>
+        </div>
+
+        <div id="cart">
+            <h2>Cart</h2>
+            <button id="beverageButton" onclick="removeBeverage()">Beverage</button>
+            <button onclick="removeCondiment('mocha')">Mocha</button>
+            <button onclick="removeCondiment('soy')">Soy</button>
+            <button onclick="removeCondiment('whip')">Whip</button>
+            <button onclick="removeCondiment('milk')">Milk</button>
+        </div>
+
+        <script>
+            let selectedBeverage = '';
+            const urlParams = new URLSearchParams(window.location.search);
+            const beverage = urlParams.get('beverage');
+
+            document.getElementById('beverageButton').textContent = beverage;
+
+            let selectedCondiments = [];
+
+            function homeScreen() {
+                window.location.href = 'index.html';
+            }
+            
+            function checkout() { 
+                const condimentsParam = selectedCondiments.join(',');
+                const url = `checkout.html?beverage=${beverage}&condiments=${condimentsParam}`;
+                window.location.href = url;
+            }
+
+            function toggleCondiment(condiment) {
+                const index = selectedCondiments.indexOf(condiment);
+                if (index == -1) {
+                    selectedCondiments.push(condiment);
+                } else {
+                    selectedCondiments.splice(index, 1);
+                }
+            }
+
+            function removeBeverage() {
+                window.location.href = 'addBeverage.html';
+            }
+
+            function removeCondiment(condiment) {
+                const index = selectedCondiments.indexOf(condiment);
+                if (index !== -1) {
+                    selectedCondiments.splice(index, 1);
+                }
+            }
+            
+        </script>
+    </body>
+</html>
