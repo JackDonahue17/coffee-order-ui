@@ -23,11 +23,11 @@
 
         const urlParams = new URLSearchParams(window.location.search);
         const beverage = urlParams.get('beverage');
-        const condiments = urlParams.get('condiments');
+        const condiments = urlParams.get('condiments').split(',');
 
         let condimentDetails = ''
 
-        const beveragePrices = {
+        /*const beveragePrices = {
             'darkroast': 1.99,
             'decaf': 1.28,
             'espresso': 1.34,
@@ -58,7 +58,28 @@
 
         document.getElementById('id').innerText = 'ID: ' + id;
         document.getElementById('orderDetails').innerText =  beverage + condimentDetails;
-        document.getElementById('orderPrice').innerText = 'Price: $' + price.toFixed(2);
+        document.getElementById('orderPrice').innerText = 'Price: $' + price.toFixed(2);*/
+
+        const orderData = {
+            beverage: beverage,
+            condiments: condiments
+        };
+
+        fetch('/orders', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(orderData)
+        })
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('orderPlaced').style.display = 'block';
+            document.getElementById('id').innerText = 'ID: ' + data.id;
+            document.getElementById('orderDetails').innerText = data.description;
+            document.getElementById('orderPrice').innerText = 'Price: $' + data.cost.toFixed(2);
+        })
+        .catch(error => console.error('Error:', error));
     </script>
 </body>
 </html>
